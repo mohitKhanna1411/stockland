@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
+import './App.css';
+import Grid from '@material-ui/core/Grid';
+import { Header, Footer } from './components/common';
+
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+        <Header />
       </header>
+      {/* <Grid>
+        21345678o9
+      </Grid> */}
+      <div className="grid-left_side"></div>
+      <article>
+        tyng8o9o.ngbf0[-]
+      </article>
+      <div className="grid-right_side"></div>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
-}
+};
 
 export default App;
