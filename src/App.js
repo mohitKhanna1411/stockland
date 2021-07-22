@@ -1,8 +1,10 @@
 import React from 'react';
 
 import './App.css';
-import Grid from '@material-ui/core/Grid';
 import { Header, Footer } from './components/common';
+import BarChart from './components/BarChart';
+
+import SplitPane from 'react-split-pane';
 
 const App = () => {
   return (
@@ -10,14 +12,27 @@ const App = () => {
       <header>
         <Header />
       </header>
-      {/* <Grid>
-        21345678o9
-      </Grid> */}
-      <div className="grid-left_side"></div>
-      <article>
-        tyng8o9o.ngbf0[-]
-      </article>
-      <div className="grid-right_side"></div>
+
+      {/* <div className="grid-left_side"></div>
+      
+      <div className="grid-right_side"></div> */}
+      <SplitPane split="vertical" defaultSize={200} primary="second">
+        <SplitPane split="horizontal" defaultSize={200} primary="second">
+          <div > <h1> Bar Chart 1</h1>  <header className="App-header">
+            <BarChart data={data} />
+          </header></div>
+          <div> <h1> Bar Chart 2</h1>
+            <header className="App-header">
+              <BarChart data={data} />
+            </header>
+          </div>
+        </SplitPane>
+        <div> <h1> Bar Chart 2</h1>
+          <header className="App-header">
+            <BarChart data={data} />
+          </header>
+        </div>
+      </SplitPane>
       <footer>
         <Footer />
       </footer>
