@@ -1,8 +1,13 @@
 import { useD3 } from '../../../hooks/useD3';
+// import { StackedBarChart } from "./StackedBarChart";
+import { findOcc } from '../../../utils/helpers';
+
 import React from 'react';
 import * as d3 from 'd3';
 
-const BarChart = ({ data })=> {
+const BarChart = ({ data }) => {
+
+    data = findOcc(data, 'Business Unit')
     const ref = useD3(
         (svg) => {
             const height = 300;
@@ -11,13 +16,13 @@ const BarChart = ({ data })=> {
 
             const x = d3
                 .scaleBand()
-                .domain(data.map((d) => d.year))
+                .domain(data.map((d) => d['Business Unit']))
                 .rangeRound([margin.left, width - margin.right])
                 .padding(0.1);
 
             const y1 = d3
                 .scaleLinear()
-                .domain([0, d3.max(data, (d) => d.sales)])
+                .domain([0, d3.max(data, (d) => d['occurrence'])])
                 .rangeRound([height - margin.bottom, margin.top]);
 
             const xAxis = (g) =>
@@ -47,7 +52,11 @@ const BarChart = ({ data })=> {
                             .attr("text-anchor", "start")
                             .text(data.y1)
                     );
-
+            svg
+                .append("g")
+                .attr("transform", "translate(0,270)")
+                .call(d3.axisBottom(x));
+            
             svg.select(".x-axis").call(xAxis);
             svg.select(".y-axis").call(y1Axis);
 
@@ -58,10 +67,10 @@ const BarChart = ({ data })=> {
                 .data(data)
                 .join("rect")
                 .attr("class", "bar")
-                .attr("x", (d) => x(d.year))
+                .attr("x", (d) => x(d['Business Unit']))
                 .attr("width", x.bandwidth())
-                .attr("y", (d) => y1(d.sales))
-                .attr("height", (d) => y1(0) - y1(d.sales));
+                .attr("y", (d) => y1(d['occurrence']))
+                .attr("height", (d) => y1(0) - y1(d['occurrence']));
         },
         [data.length]
     );
