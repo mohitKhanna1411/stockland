@@ -10,11 +10,9 @@ import {
 } from "d3";
 
 export const Graph = ({ datasets, keys, colors }) => {
-    console.log(datasets)
     const [data, setData] = useState(datasets);
     const svgRef = useRef();
     const wrapperRef = useRef();
-    console.log(data);
     useEffect(() => {
         setData(datasets)
     },[datasets])
