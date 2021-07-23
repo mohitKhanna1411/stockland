@@ -10,7 +10,7 @@ export const findOcc = (arr, key) => {
             // If yes! then increase the occurrence by 1
             arr2.forEach((k) => {
                 if (k[key] === x[key]) {
-                    k["occurrence"]++
+                    k['occurrence']++
                 }
             })
 
@@ -20,10 +20,76 @@ export const findOcc = (arr, key) => {
             // set the occurrence to 1
             let a = {}
             a[key] = x[key]
-            a["occurrence"] = 1
+            a['occurrence'] = 1
             arr2.push(a);
         }
     })
 
     return arr2
+}
+
+export const uniqueKeyValues = (arr, key) => {
+    return [...new Set(arr.map((obj) => { return obj[key] }))];
+}
+
+
+export const sanitizeData = (arr) => {
+    let newArray = arr.map(item => {
+        if (item['Post Type'] === 'Reply') {
+            return { ...item, 'Post Type': 'Replies' }
+        }
+        else if (item['Post Type'] === 'Comment Mentions') {
+            return { ...item, 'Post Type': 'Comments' }
+        }
+        else if (item['Post Type'] === 'Unpublished Posts') {
+            return { ...item, 'Post Type': 'Posts' }
+        }
+        else if (item['Post Type'] === 'Media Mentions') {
+            return { ...item, 'Post Type': 'Mentions' }
+        }
+        else {
+            return item
+        }
+    })
+    newArray = newArray.map(item => {
+        if (item['Region'] === 'NSWS' || item['Region'] === 'NSWN') {
+            return { ...item, 'Region': 'NSW' }
+        }
+        if (item['Region'] === 'NaN') {
+            return { ...item, 'Region': 'Unknown' }
+        }
+        else {
+            return item
+        }
+    })
+    newArray = newArray.map(item => {
+        if (item['Business Unit'] === 'NaN') {
+            return { ...item, 'Business Unit': 'Unknown' }
+        }
+        else {
+            return item
+        }
+    })
+    return newArray
+}
+
+
+export const transformStackedData = (arr, keys, stackKeys, stacked) => {
+    let newArray = [];
+    keys.forEach((key) => {
+        let temp = {}
+        console.log(key);
+        temp['Business Unit'] = key;
+        stackKeys.forEach((k) => {
+            temp[k] = 0
+        })
+        arr.forEach((x) => {
+            if (x['Business Unit'] === key) {
+                temp[x[stacked]]++
+            }
+        })
+        newArray.push(temp)
+    })
+    console.log(newArray)
+    return newArray
 }

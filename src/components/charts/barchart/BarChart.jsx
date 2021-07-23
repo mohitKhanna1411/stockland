@@ -1,13 +1,10 @@
 import { useD3 } from '../../../hooks/useD3';
-// import { StackedBarChart } from "./StackedBarChart";
-import { findOcc } from '../../../utils/helpers';
 
 import React from 'react';
 import * as d3 from 'd3';
 
-const BarChart = ({ data }) => {
-
-    data = findOcc(data, 'Business Unit')
+const BarChart = ({ data,xKey,yKey }) => {
+    // console.log(data)
     const ref = useD3(
         (svg) => {
             const height = 300;
@@ -16,13 +13,13 @@ const BarChart = ({ data }) => {
 
             const x = d3
                 .scaleBand()
-                .domain(data.map((d) => d['Business Unit']))
+                .domain(data.map((d) => d[xKey]))
                 .rangeRound([margin.left, width - margin.right])
                 .padding(0.1);
 
             const y1 = d3
                 .scaleLinear()
-                .domain([0, d3.max(data, (d) => d['occurrence'])])
+                .domain([0, d3.max(data, (d) => d[yKey])])
                 .rangeRound([height - margin.bottom, margin.top]);
 
             const xAxis = (g) =>
@@ -36,7 +33,8 @@ const BarChart = ({ data }) => {
                         )
                         .tickSizeOuter(0)
                 );
-
+            // xAxis.selectAll(".tick text")
+                    
             const y1Axis = (g) =>
                 g
                     .attr("transform", `translate(${margin.left},0)`)
@@ -67,10 +65,11 @@ const BarChart = ({ data }) => {
                 .data(data)
                 .join("rect")
                 .attr("class", "bar")
-                .attr("x", (d) => x(d['Business Unit']))
+                .attr("x", (d) => x(d[xKey]))
                 .attr("width", x.bandwidth())
-                .attr("y", (d) => y1(d['occurrence']))
-                .attr("height", (d) => y1(0) - y1(d['occurrence']));
+                .attr("y", (d) => y1(d[yKey]))
+                .attr("height", (d) => y1(0) - y1(d[yKey]))
+            
         },
         [data.length]
     );
