@@ -64,8 +64,6 @@ const App = () => {
       <div className="divMargin"><h1>Posts everyday - 2021</h1><LineChart data={lineChartData} xKey={'Published Date'} yKey={'occurrence'} /></div>
 
 
-
-
       {/* <div><h1>Business Unit Occurences</h1><BarChart data={barChartDataBU} xKey={'Business Unit'} yKey={'occurrence'} /></div>
       <div><h1>Post type Occurences</h1><BarChart data={barChartDataPT} xKey={'Post Type'} yKey={'occurrence'} /></div>
       <div><h1>Case type Occurences</h1><BarChart data={barChartDataCT} xKey={'Case Type'} yKey={'occurrence'} /></div>
