@@ -2,14 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
 
-// const data = [
-//                 {item: 'A', count: 590},
-//                 {item: 'B', count: 291},
-//                 {item: 'C', count: 348},
-//                 {item: 'D', count: 145},
-//                 {item: 'E', count: 46}
-//              ]
-
 
 const Pie = ({data}) => {
 
@@ -22,7 +14,7 @@ const Pie = ({data}) => {
 		// Define arcs for graphing 
 		const arc = d3.arc().innerRadius(0).outerRadius(200)
 
-		const colors = d3.scaleOrdinal(['#ffa822','#134e6f','#ff6150','#1ac0c6','#dee0e6'])
+		const colors = d3.scaleOrdinal(['#ffa822','#134e6f','#ff6150','#1ac0c6','#dee0e6','#6c3635'])
 
 		// Define the size and position of svg
 		const svg = d3.select(pieChart.current)

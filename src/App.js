@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Header, Footer } from './components/common';
 import jsonData from './data/data.json'
-import { BarChart, StackedBarChart, PieChart, AreaChart } from './components/charts';
-import { findOcc, uniqueKeyValues, sanitizeData, transformStackedData } from './utils/helpers';
+import { BarChart, StackedBarChart, PieChart, AreaChart, LineChart } from './components/charts';
+import { findOcc, sanitizeData, transformStackedData } from './utils/helpers';
 
 const App = () => {
   const [barChartDataBU, setBarChartDataBU] = useState([]);
@@ -16,6 +16,7 @@ const App = () => {
   const [stackedBarChartData, setStackedBarChartData] = useState([]);
   const [pieChartData, setPieChartData] = useState([]);
   const [areaChartData, setAreaChartData] = useState([]);
+  const [lineChartData, setLineChartData] = useState([]);
 
   useEffect(() => {
     const data = sanitizeData(jsonData)
@@ -25,9 +26,11 @@ const App = () => {
     setBarChartDataR(findOcc(data, 'Region'))
     setBarChartDataS(findOcc(data, 'Sentiment'))
     setBarChartDataCl(findOcc(data, 'Classification Type'))
-    setStackedBarChartData(transformStackedData(data, uniqueKeyValues(data, 'Business Unit'), uniqueKeyValues(data, 'Sentiment'), 'Sentiment'));
+    setStackedBarChartData(transformStackedData(data, 'Business Unit', 'Sentiment'))
     setPieChartData(findOcc(data, 'Region'))
-    setAreaChartData(findOcc(data, 'Published Date'))
+    setAreaChartData(transformStackedData(data, 'Published Date', 'Business Unit'))
+    setLineChartData(findOcc(data, 'Published Date'))
+
   }, [])
   return (
     <div className="App">
@@ -42,7 +45,8 @@ const App = () => {
       <div><h1>Classification Type Occurences</h1><BarChart data={barChartDataCl} xKey={'Classification Type'} yKey={'occurrence'} /></div>
       <div><h1>Sentiment Stacked Graph</h1><StackedBarChart data={stackedBarChartData} /></div>
       <div><h1>Region Pie Chart</h1><PieChart data={pieChartData} /></div>
-      {/* <div><h1>Area Chart</h1><AreaChart data={areaChartData} /></div> */}
+      <div><h1>Area Chart</h1><AreaChart data={areaChartData} /></div>
+      <div><h1>Area Chart</h1><LineChart data={lineChartData} /></div>
       <footer>
         <Footer />
       </footer>

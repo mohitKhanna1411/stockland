@@ -1,27 +1,6 @@
 import React, { useState } from "react";
 import { Graph } from "./Graph";
 
-// const data = [
-//   {
-//     name: "Brand 1",
-//     Affiliate: 30,
-//     Social: 60,
-//     Media: 90
-//   },
-//   {
-//     name: "Brand 2",
-//     Affiliate: 30,
-//     Social: 45,
-//     Media: 80
-//   },
-//   {
-//     name: "Brand 3",
-//     Affiliate: 90,
-//     Social: 140,
-//     Media: 220
-//   }
-// ];
-
 const allKeys = ["Neutral", "Positive", "Negative"];
 
 const colors = {

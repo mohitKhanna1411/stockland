@@ -13,43 +13,52 @@ import {
 } from "d3";
 import useResizeObserver from "./useResizeObserver";
 
+const keys = ["Residential","Retail", "Mixed BU", "Unknown"];
+
+const colors = {
+    'Residential' : "rgb(254,98,10,0.8)",
+    'Retail': "rgba(69, 0, 0, 0.8)",
+    'Mixed BU': "rgba(240, 72, 19, 0.8)",
+    'Unknown': "rgba(255, 199, 128, 0.8)"
+};
 /**
  * Component that renders a StackedBarChart
  */
-
-function AreaChart({ data, keys, colors }) {
+// const keys
+const AreaChart = ({ data }) => {
+	data.sort((a, b) => a['Published Date'].localeCompare(b['Published Date']))
+	// console.log(data)
   const svgRef = useRef();
   const wrapperRef = useRef();
   const dimensions = useResizeObserver(wrapperRef);
 
   // will be called initially and on every data change
-  useEffect(() => {
-    const svg = select(svgRef.current);
-    const { width, height } =
-      dimensions || wrapperRef.current.getBoundingClientRect();
+	useEffect(() => {
+		const svg = select(svgRef.current);
+		const { width, height } = dimensions || wrapperRef.current.getBoundingClientRect();
 
-    // stacks / layers
-    const stackGenerator = stack()
-      .keys(keys)
-      .order(stackOrderAscending);
-    const layers = stackGenerator(data);
-    const extent = [
-      0,
-      max(layers, layer => max(layer, sequence => sequence[1]))
-    ];
+		// stacks / layers
+		const stackGenerator = stack()
+			.keys(keys)
+			.order(stackOrderAscending);
+		const layers = stackGenerator(data);
+		const extent = [
+			0,
+			max(layers, layer => max(layer, sequence => sequence[1]))
+		];
 
-    // scales
-    const xScale = scalePoint()
-      .domain(data.map(d => d.year))
-      .range([0, width]);
+		// scales
+		const xScale = scalePoint()
+			.domain(data.map(d => d['Published Date']))
+			.range([0, width]);
 
-    const yScale = scaleLinear()
-      .domain(extent)
-      .range([height, 0]);
+		const yScale = scaleLinear()
+			.domain(extent)
+			.range([height, 0]);
 
-    // area generator
-    const areaGenerator = area()
-      .x(sequence => xScale(sequence.data.year))
+		// area generator
+		const areaGenerator = area()
+			.x(sequence => xScale(sequence.data['Published Date']))
       .y0(sequence => yScale(sequence[0]))
       .y1(sequence => yScale(sequence[1]))
       .curve(curveCardinal);
@@ -75,7 +84,7 @@ function AreaChart({ data, keys, colors }) {
   }, [colors, data, dimensions, keys]);
 
   return (
-    <React.Fragment>
+    <React.Fragment><></>
       <div ref={wrapperRef} style={{ marginBottom: "2rem" }}>
         <svg ref={svgRef}>
           <g className="x-axis" />

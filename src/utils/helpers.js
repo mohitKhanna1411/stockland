@@ -1,3 +1,5 @@
+import * as d3 from 'd3';
+
 export const findOcc = (arr, key) => {
     let arr2 = [];
 
@@ -32,10 +34,10 @@ export const uniqueKeyValues = (arr, key) => {
     return [...new Set(arr.map((obj) => { return obj[key] }))];
 }
 
-
+export const tParser = d3.timeParse("%d/%m/%Y")
 export const sanitizeData = (arr) => {
     let newArray = arr.map(item => {
-        item['Published Date'] = item['Published Date'].slice(0, -5)
+        item['Published Date'] = d3.timeFormat("%d/%m/%Y")(tParser(item['Published Date'].slice(0, -5)))
 
         if (item['Post Type'] === 'Reply') {
             return { ...item, 'Post Type': 'Replies' }
@@ -72,27 +74,34 @@ export const sanitizeData = (arr) => {
             return item
         }
     })
-    console.log(newArray)
+    console.log(typeof newArray[0]['Published Date'])
     return newArray
 }
 
 
-export const transformStackedData = (arr, keys, stackKeys, stacked) => {
+export const transformStackedData = (arr, mainKey, stackedKey) => {
     let newArray = [];
-    keys.forEach((key) => {
+    // console.log(arr)
+    const u = uniqueKeyValues(arr, mainKey);
+    u.forEach((key) => {
         let temp = {}
-        console.log(key);
-        temp['Business Unit'] = key;
-        stackKeys.forEach((k) => {
+        // console.log(key);
+        temp[mainKey] = key;
+        uniqueKeyValues(arr, stackedKey).forEach((k) => {
             temp[k] = 0
         })
         arr.forEach((x) => {
-            if (x['Business Unit'] === key) {
-                temp[x[stacked]]++
+            if (x[mainKey] === key) {
+                temp[x[stackedKey]]++
             }
         })
         newArray.push(temp)
     })
-    console.log(newArray)
+    // console.log(newArray)
     return newArray
+}
+
+export const sortByDateAscending = (a, b) => {
+    // Dates will be cast to numbers automagically:
+    return new Date(a['Published Date']) - new Date(b['Published Date']);
 }
