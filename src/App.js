@@ -3,11 +3,10 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Header, Footer } from './components/common';
 import jsonData from './data/data.json'
-import { BarChart, StackedBarChart, PieChart } from './components/charts';
+import { BarChart, StackedBarChart, PieChart, AreaChart } from './components/charts';
 import { findOcc, uniqueKeyValues, sanitizeData, transformStackedData } from './utils/helpers';
 
 const App = () => {
-  // const [data, setData] = useState(jsonData);
   const [barChartDataBU, setBarChartDataBU] = useState([]);
   const [barChartDataPT, setBarChartDataPT] = useState([]);
   const [barChartDataCT, setBarChartDataCT] = useState([]);
@@ -16,7 +15,7 @@ const App = () => {
   const [barChartDataCl, setBarChartDataCl] = useState([]);
   const [stackedBarChartData, setStackedBarChartData] = useState([]);
   const [pieChartData, setPieChartData] = useState([]);
-  // const [data, setData] = useState([]);
+  const [areaChartData, setAreaChartData] = useState([]);
 
   useEffect(() => {
     const data = sanitizeData(jsonData)
@@ -28,6 +27,7 @@ const App = () => {
     setBarChartDataCl(findOcc(data, 'Classification Type'))
     setStackedBarChartData(transformStackedData(data, uniqueKeyValues(data, 'Business Unit'), uniqueKeyValues(data, 'Sentiment'), 'Sentiment'));
     setPieChartData(findOcc(data, 'Region'))
+    setAreaChartData(findOcc(data, 'Published Date'))
   }, [])
   return (
     <div className="App">
@@ -42,6 +42,7 @@ const App = () => {
       <div><h1>Classification Type Occurences</h1><BarChart data={barChartDataCl} xKey={'Classification Type'} yKey={'occurrence'} /></div>
       <div><h1>Sentiment Stacked Graph</h1><StackedBarChart data={stackedBarChartData} /></div>
       <div><h1>Region Pie Chart</h1><PieChart data={pieChartData} /></div>
+      {/* <div><h1>Area Chart</h1><AreaChart data={areaChartData} /></div> */}
       <footer>
         <Footer />
       </footer>

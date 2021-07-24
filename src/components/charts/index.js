@@ -1,7 +1,7 @@
 import BarChart from './barchart';
 import LineChart from './linechart';
-import MapChart from './mapchart';
+import AreaChart from './areachart';
 import PieChart from './piechart';
 import StackedBarChart from './stackedbarchart';
 
-export { BarChart, LineChart, MapChart, PieChart, StackedBarChart };
+export { BarChart, LineChart, AreaChart, PieChart, StackedBarChart };

@@ -53,7 +53,7 @@ const Pie = ({data}) => {
 					console.log(d)
 
 					tooldiv.style('visibility','visible')
-							.text(`${d.data.Region}:` + `${d.data.occurrence}`)
+							.text(d.data.Region+':' + d.data.occurrence)
 				})
 				.on('mousemove', (e,d)=>{
 					tooldiv.style('top', (e.pageY-50) + 'px')

@@ -35,6 +35,8 @@ export const uniqueKeyValues = (arr, key) => {
 
 export const sanitizeData = (arr) => {
     let newArray = arr.map(item => {
+        item['Published Date'] = item['Published Date'].slice(0, -5)
+
         if (item['Post Type'] === 'Reply') {
             return { ...item, 'Post Type': 'Replies' }
         }
@@ -70,6 +72,7 @@ export const sanitizeData = (arr) => {
             return item
         }
     })
+    console.log(newArray)
     return newArray
 }
 
