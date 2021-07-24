@@ -29,7 +29,8 @@ const Pie = ({data}) => {
 						  .append('div')
 						  .style('visibility','hidden')
 						  .style('position','absolute')
-						  .style('background-color','red')
+						  .style('background-color','darkslateblue')
+						  .style('color','white')
 
 
 		// Draw pie

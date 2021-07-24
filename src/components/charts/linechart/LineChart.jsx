@@ -47,7 +47,7 @@ const LineChart = ({data}) => {
 				svg.append('path')
 					.datum(data)
 					.attr('fill', 'none')
-					.attr('stroke','steelblue')
+					.attr('stroke','darkslateblue')
 					.attr('stroke-width', 3)
 					.attr('d', d3.line()
 								.x(function(d){return x(d['Published Date'])})

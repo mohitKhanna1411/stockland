@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Header, Footer } from './components/common';
 import jsonData from './data/data.json'
-import { BarChart, StackedBarChart, PieChart, AreaChart, LineChart } from './components/charts';
+import { BarChart, StackedBarChart, PieChart, LineChart } from './components/charts';
 import { findOcc, sanitizeData, transformStackedData, findConditionalOcc, topN } from './utils/helpers';
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
   const [stackedBarChartDataBU, setStackedBarChartDataBU] = useState([]);
   const [stackedBarChartDataPT, setStackedBarChartDataPT] = useState([]);
   const [pieChartData, setPieChartData] = useState([]);
-  const [areaChartData, setAreaChartData] = useState([]);
+  // const [areaChartData, setAreaChartData] = useState([]);
   const [lineChartData, setLineChartData] = useState([]);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const App = () => {
     setBarChartDataS(findOcc(data, 'Sentiment'))
     setBarChartDataCl(findOcc(data, 'Classification Type'))
     setPieChartData(findOcc(data, 'Sentiment'))
-    setAreaChartData(transformStackedData(data, 'Published Date', 'Business Unit'))
+    // setAreaChartData(transformStackedData(data, 'Published Date', 'Business Unit'))
     setLineChartData(findOcc(data, 'Published Date'))
 
   }, [])
@@ -61,19 +61,17 @@ const App = () => {
       <div><h1>Top 5 Topics Among Positive Sentiment</h1><BarChart data={barChartDataPositive} xKey={'Topic'} yKey={'occurrence'} /></div>
       <div><h1>Top 5 Topics Among Negative Sentiment</h1><BarChart data={barChartDataNegative} xKey={'Topic'} yKey={'occurrence'} /></div>
 
-
-
       <div><h1>Posts everyday - 2021</h1><LineChart data={lineChartData} /></div>
 
 
 
 
-      <div><h1>Business Unit Occurences</h1><BarChart data={barChartDataBU} xKey={'Business Unit'} yKey={'occurrence'} /></div>
+      {/* <div><h1>Business Unit Occurences</h1><BarChart data={barChartDataBU} xKey={'Business Unit'} yKey={'occurrence'} /></div>
       <div><h1>Post type Occurences</h1><BarChart data={barChartDataPT} xKey={'Post Type'} yKey={'occurrence'} /></div>
       <div><h1>Case type Occurences</h1><BarChart data={barChartDataCT} xKey={'Case Type'} yKey={'occurrence'} /></div>
       <div><h1>Region Occurences</h1><BarChart data={barChartDataR} xKey={'Region'} yKey={'occurrence'} /></div>
-      <div><h1>Classification Type Occurences</h1><BarChart data={barChartDataCl} xKey={'Classification Type'} yKey={'occurrence'} /></div>
-      <div><h1>Area Chart</h1><AreaChart data={areaChartData} /></div>
+      <div><h1>Classification Type Occurences</h1><BarChart data={barChartDataCl} xKey={'Classification Type'} yKey={'occurrence'} /></div> */}
+      {/* <div><h1>Area Chart</h1><AreaChart data={areaChartData} /></div> */}
       <footer>
         <Footer />
       </footer>

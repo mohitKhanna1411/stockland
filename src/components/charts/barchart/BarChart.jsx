@@ -7,8 +7,8 @@ const BarChart = ({ data,xKey,yKey }) => {
     // console.log(data)
     const ref = useD3(
         (svg) => {
-            const height = 300;
-            const width = 500;
+            const height = 500;
+            const width = 1440;
             const margin = { top: 0, right: 30, bottom: 30, left: 40 };
 
             const x = d3
@@ -52,15 +52,17 @@ const BarChart = ({ data,xKey,yKey }) => {
                     );
             svg
                 .append("g")
-                .attr("transform", "translate(0,270)")
+                .attr("transform", `translate(0, 470)`)
                 .call(d3.axisBottom(x));
-            
+            svg.append('g')
+                .attr("transform", `translate(${margin.left},0)`)
+					.call(d3.axisLeft(y1))
             svg.select(".x-axis").call(xAxis);
             svg.select(".y-axis").call(y1Axis);
 
             svg
                 .select(".plot-area")
-                .attr("fill", "steelblue")
+                .attr("fill", "darkslateblue")
                 .selectAll(".bar")
                 .data(data)
                 .join("rect")

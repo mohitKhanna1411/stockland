@@ -4,9 +4,9 @@ import { Graph } from "./Graph";
 const allKeys = ["Neutral", "Positive", "Negative"];
 
 const colors = {
-  Neutral: "rgb(179,179,179, 0.8)",
-  Positive: "rgb(131,156,155,0.8)",
-  Negative: "rgb(185,138,93,0.8)"
+  Neutral: "rgb(179,179,179)",
+  Positive: "rgb(131,156,155)",
+  Negative: "rgb(185,138,93)"
 };
 
 const StackedBarChart = ({ data, mainKey }) => {
