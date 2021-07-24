@@ -9,14 +9,14 @@ const colors = {
   Negative: "rgb(185,138,93,0.8)"
 };
 
-const StackedBarChart = ({ data }) => {
+const StackedBarChart = ({ data, mainKey }) => {
     const [keys, setKeys] = useState(allKeys);
     // const stackedData = data;
     console.log(data)
 
   return (
     <div>
-      <Graph datasets={data} colors={colors} keys={keys} />
+      <Graph datasets={data} colors={colors} keys={keys} mainKey={ mainKey }/>
       <div className="fields" style={{ display: "flex" }}>
         {allKeys.map((key) => (
           <div key={key} className="field" style={{ display: "flex" }}>
@@ -32,7 +32,7 @@ const StackedBarChart = ({ data }) => {
                 }
               }}
             />
-            <label htmlFor={key} style={{ color: colors[key] }}>
+            <label htmlFor={key} style={{ backgroundColor: colors[key] , color:'#ffffff'}}>
               {key}
             </label>
           </div>

@@ -14,7 +14,7 @@ const Pie = ({data}) => {
 		// Define arcs for graphing 
 		const arc = d3.arc().innerRadius(0).outerRadius(200)
 
-		const colors = d3.scaleOrdinal(['#ffa822','#134e6f','#ff6150'])
+		const colors = d3.scaleOrdinal(['#b3b3b3','#839c9b','#b98a5d'])
 
 		// Define the size and position of svg
 		const svg = d3.select(pieChart.current)

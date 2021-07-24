@@ -69,7 +69,6 @@ const BarChart = ({ data,xKey,yKey }) => {
                 .attr("width", x.bandwidth())
                 .attr("y", (d) => y1(d[yKey]))
                 .attr("height", (d) => y1(0) - y1(d[yKey]))
-            
         },
         [data.length]
     );

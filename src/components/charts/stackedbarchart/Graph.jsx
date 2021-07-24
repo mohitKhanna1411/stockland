@@ -8,8 +8,8 @@ import {
   stack,
   max
 } from "d3";
-
-export const Graph = ({ datasets, keys, colors }) => {
+// const mainKey = 'Classification Type'
+export const Graph = ({ datasets, keys, colors,mainKey }) => {
     const [data, setData] = useState(datasets);
     const svgRef = useRef();
     const wrapperRef = useRef();
@@ -30,7 +30,7 @@ export const Graph = ({ datasets, keys, colors }) => {
         const yScale = scaleLinear().domain(extent).range([height, 0]);
 
         const x0Scale = scaleBand()
-        .domain(data.map((d) => d['Business Unit']))
+        .domain(data.map((d) => d[mainKey]))
         .range([0, width])
         .padding(0.46);
     
@@ -57,7 +57,7 @@ export const Graph = ({ datasets, keys, colors }) => {
       .join("rect")
       .attr(
         "x",
-        (sequence) => x0Scale(sequence.data['Business Unit'])
+        (sequence) => x0Scale(sequence.data[mainKey])
       )
       .attr("width", x0Scale.bandwidth())
       .attr("y", (sequence) => yScale(sequence[1]))
@@ -69,15 +69,15 @@ export const Graph = ({ datasets, keys, colors }) => {
       .on("click", (e) => {
         const filteredD = data.map((d) => {
           return {
-            'Business Unit': d['Business Unit'],
-            'Positive': d['Business Unit'] === e ? 0 : d.Positive,
-            'Negative': d['Business Unit'] === e ? 0 : d.Negative,
-            'Neutral': d['Business Unit'] === e ? 0 : d.Neutral
+            mainKey: d[mainKey],
+            'Positive': d[mainKey] === e ? 0 : d.Positive,
+            'Negative': d[mainKey] === e ? 0 : d.Negative,
+            'Neutral': d[mainKey] === e ? 0 : d.Neutral
           };
         });
         setData(filteredD);
       });
-  }, [data, keys, colors]);
+  }, [data, keys, colors,mainKey]);
 
   return (
     <>
