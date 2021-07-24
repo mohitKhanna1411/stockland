@@ -79,7 +79,7 @@ const BarChart = ({ data,xKey,yKey }) => {
         <svg
             ref={ref}
             style={{
-                height: 700,
+                height: 500,
                 width: "100%",
                 marginRight: "0px",
                 marginLeft: "0px",

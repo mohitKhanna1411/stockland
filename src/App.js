@@ -51,17 +51,17 @@ const App = () => {
       <header>
         <Header />
       </header>
-      <div><h1>Sentiment Occurences</h1><BarChart data={barChartDataS} xKey={'Sentiment'} yKey={'occurrence'} /></div>
-      <div><h1>Post Volume by Sentiment</h1><PieChart data={pieChartData} /></div>
+      <div className="divMargin"><h1>Sentiment Occurences</h1><BarChart data={barChartDataS} xKey={'Sentiment'} yKey={'occurrence'} /></div>
+      <div className="divMargin"><h1>Post Volume by Sentiment</h1><PieChart data={pieChartData} /></div>
 
-      <div><h1>Social Sentiment by Classification Type</h1><StackedBarChart data={stackedBarChartDataCT} mainKey={'Classification Type'} /></div>
-      <div><h1>Social Sentiment by Business Unit</h1><StackedBarChart data={stackedBarChartDataBU} mainKey={'Business Unit'} /></div>
-      <div><h1>Post Type by Sentiment</h1><StackedBarChart data={stackedBarChartDataPT} mainKey={'Post Type'} /></div>
+      <div className="divMargin"><h1>Social Sentiment by Classification Type</h1><StackedBarChart data={stackedBarChartDataCT} mainKey={'Classification Type'} /></div>
+      <div className="divMargin"><h1>Social Sentiment by Business Unit</h1><StackedBarChart data={stackedBarChartDataBU} mainKey={'Business Unit'} /></div>
+      <div className="divMargin"><h1>Post Type by Sentiment</h1><StackedBarChart data={stackedBarChartDataPT} mainKey={'Post Type'} /></div>
 
-      <div><h1>Top 5 Topics Among Positive Sentiment</h1><BarChart data={barChartDataPositive} xKey={'Topic'} yKey={'occurrence'} /></div>
-      <div><h1>Top 5 Topics Among Negative Sentiment</h1><BarChart data={barChartDataNegative} xKey={'Topic'} yKey={'occurrence'} /></div>
+      <div className="divMargin"><h1>Top 5 Topics Among Positive Sentiment</h1><BarChart data={barChartDataPositive} xKey={'Topic'} yKey={'occurrence'} /></div>
+      <div className="divMargin"><h1>Top 5 Topics Among Negative Sentiment</h1><BarChart data={barChartDataNegative} xKey={'Topic'} yKey={'occurrence'} /></div>
 
-      <div><h1>Posts everyday - 2021</h1><LineChart data={lineChartData} /></div>
+      <div className="divMargin"><h1>Posts everyday - 2021</h1><LineChart data={lineChartData} xKey={'Published Date'} yKey={'occurrence'} /></div>
 
 
 

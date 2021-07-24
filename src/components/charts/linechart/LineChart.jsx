@@ -14,7 +14,7 @@ const LineChart = ({data}) => {
 
 				const margin = {top: 20, right: 30, bottom: 30, left: 30}
 				const width = 1440
-				const height = 300
+				const height = 500
 
 				// Set up chart
 				const svg = d3.select(d3Chart.current)
