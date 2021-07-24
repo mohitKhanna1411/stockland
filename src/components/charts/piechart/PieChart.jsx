@@ -14,7 +14,7 @@ const Pie = ({data}) => {
 		// Define arcs for graphing 
 		const arc = d3.arc().innerRadius(0).outerRadius(200)
 
-		const colors = d3.scaleOrdinal(['#ffa822','#134e6f','#ff6150','#1ac0c6','#dee0e6','#6c3635'])
+		const colors = d3.scaleOrdinal(['#ffa822','#134e6f','#ff6150'])
 
 		// Define the size and position of svg
 		const svg = d3.select(pieChart.current)
@@ -45,7 +45,7 @@ const Pie = ({data}) => {
 					console.log(d)
 
 					tooldiv.style('visibility','visible')
-							.text(d.data.Region+':' + d.data.occurrence)
+							.text(d.data.Sentiment+':' + d.data.occurrence)
 				})
 				.on('mousemove', (e,d)=>{
 					tooldiv.style('top', (e.pageY-50) + 'px')

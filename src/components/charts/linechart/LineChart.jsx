@@ -6,14 +6,14 @@ const LineChart = ({data}) => {
 	const d3Chart = useRef()
     useEffect(() => {
     console.log(data)
-    data = data.sort(sortByDateAscending)
-    console.log(data)
         
     data.forEach((d) => {
         d['Published Date'] = tParser(d['Published Date'])
         console.log(typeof d['Published Date'])
-    }
-    )
+    })
+    data = data.sort(sortByDateAscending)
+    console.log(data)
+	
     // console.log(typeof data[0]['Published Date'])
 
 				const margin = {top: 20, right: 30, bottom: 30, left: 30}
@@ -51,12 +51,19 @@ const LineChart = ({data}) => {
 				svg.append('path')
 					.datum(data)
 					.attr('fill', 'none')
-					.attr('stroke','red')
+					.attr('stroke','steelblue')
 					.attr('stroke-width', 3)
 					.attr('d', d3.line()
 								.x(function(d){return x(d['Published Date'])})
 								.y(function(d){return y(d['occurrence'])})
-						)
+				)
+				svg.append('text')
+					.attr('x',(width/2))
+					.attr('y', (margin.top/5 - 10))
+					.attr('text-anchor', 'middle')
+					.attr('font-size', '16px')
+					.attr('fill','red')
+					.text('Data points collected everyday in 2021')
 },[data])
 
 	return (

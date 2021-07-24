@@ -103,5 +103,5 @@ export const transformStackedData = (arr, mainKey, stackedKey) => {
 
 export const sortByDateAscending = (a, b) => {
     // Dates will be cast to numbers automagically:
-    return new Date(a['Published Date']) - new Date(b['Published Date']);
+    return a['Published Date'] - b['Published Date'];
 }
